@@ -12,17 +12,19 @@ def get_price(url):
     options.add_argument("--headless")
     options.add_argument("--disable-blink-features=AutomationControlled")
 
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options
-    )
-
-    driver.get(url)
+    driver = None  # 🔥 important
 
     try:
+        driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install()),
+            options=options
+        )
+
+        driver.get(url)
+
         wait = WebDriverWait(driver, 10)
 
-        # 🔥 Wait specifically for price container (IMPORTANT)
+        # Wait for price container
         wait.until(
             EC.presence_of_element_located((By.ID, "corePriceDisplay_desktop_feature_div"))
         )
@@ -32,16 +34,16 @@ def get_price(url):
         try:
             whole = driver.find_element(By.CLASS_NAME, "a-price-whole").text
             fraction = driver.find_element(By.CLASS_NAME, "a-price-fraction").text
-
             price = whole.replace(",", "") + "." + fraction
-
         except:
             price = "Price not found"
 
     except Exception as e:
-        print("Error:", e)
+        print("❌ Selenium Error:", e)
         price = "Price not found"
 
-    driver.quit()
-    return price
+    finally:
+        if driver:
+            driver.quit()   # ✅ only once
 
+    return price
