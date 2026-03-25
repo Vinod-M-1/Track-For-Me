@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking Started - TrackForMe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+    <div class="container success-box">
+        <h1>Tracking Started!</h1>
+        
+        <div class="data-card">
+            <p><b>Product:</b> {{ name }}</p>
+            <p><b>Current Price:</b> <span class="price-tag">{{ price }}</span></p>
+            <p><b>Target Price:</b> <span class="target-tag">{{ target }}</span></p>
+        </div>
+
+        <a href="/" class="btn">Track another product</a>
+    </div>
+</body>
+</html>

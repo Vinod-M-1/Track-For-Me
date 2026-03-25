@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product - TrackForMe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="badge">Update Target Price</h2>
+
+        <p class="product-info"><b>Product:</b> {{ product.product_name }}</p>
+
+        <form method="POST" class="update-form">
+            <label>New Target Price:</label>
+            <input type="number" step="0.01" name="target_price" value="{{ product.target_price }}" required>
+
+            <label>Notification Email:</label>
+            <input type="email" name="email" value="{{ product.email }}" required>
+
+            <button type="submit" class="btn-update">Update Product</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="/dashboard">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

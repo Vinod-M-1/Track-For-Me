@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - TrackForMe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <header class="dash-header">
+    <div class="header-left">
+        <h1>Track For Me Dashboard</h1> <br>
+        <p class="count-info">Total Products Tracking: <span class="count-badge">{{ products|length }}</span></p>
+    </div>
+    <a href="/" class="btn add-btn">Add New Product</a>
+</header>
+
+        <div class="table-wrapper">
+            <table class="brutalist-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Current Price</th>
+                        <th>Target Price</th>
+                        <th>Last Checked</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                    <tr>
+                        <td>{{ p.product_name }}</td>
+                        <td class="price-cell">
+                            {% if p.current_price %}
+                                ₹ {{ "%.2f"|format(p.current_price) }}
+                            {% else %}
+                                <span class="na-text">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td class="target-cell">₹ {{ "%.2f"|format(p.target_price) }}</td>
+                        <td>{{ p.last_checked }}</td>
+                        <td><span class="status-tag">{{ p.status }}</span></td>
+                        <td>{{ p.email }}</td>
+                        <td class="actions">
+                            <a href="/update/{{ p.id }}" class="edit-link">✏️ Edit</a>
+                            <span class="sep">|</span>
+                            <a href="/delete/{{ p.id }}" class="delete-link" onclick="return confirm('Delete this product?')">🗑️ Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

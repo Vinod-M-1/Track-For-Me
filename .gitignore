@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Logs / temp
+*.log
+
+# Database dumps (if any later)
+*.sql
+
+# Selenium cache
+*.cache
+
+# Text files (optional)
+prices.txt
